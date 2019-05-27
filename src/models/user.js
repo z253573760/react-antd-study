@@ -1,5 +1,3 @@
-import { query as queryUsers, queryCurrent, login, getRoleAccess } from '@/services/user';
-
 export default {
   namespace: 'user',
   state: {
@@ -9,37 +7,37 @@ export default {
   },
   subscriptions: {
     setup({ dispatch, history }) {
-      dispatch({ type: 'getRoleAccess' });
+      //dispatch({ type: 'getRoleAccess' });
     },
   },
   effects: {
     *login(_, { call, put }) {
-      const {
-        datas: { group_limits },
-      } = yield login({});
+      // const {
+      //   datas: { group_limits },
+      // } = yield login({});
     },
     *getRoleAccess(_, { call, put }) {
-      const {
-        datas: { group_limits },
-      } = yield getRoleAccess();
-      yield put({
-        type: 'save',
-        payload: { group_limits },
-      });
+      // const {
+      //   datas: { group_limits },
+      // } = yield getRoleAccess();
+      // yield put({
+      //   type: 'save',
+      //   payload: { group_limits },
+      // });
     },
     *fetch(_, { call, put }) {
-      const response = yield call(queryUsers);
-      yield put({
-        type: 'save',
-        payload: { list: response },
-      });
+      // const response = yield call(queryUsers);
+      // yield put({
+      //   type: 'save',
+      //   payload: { list: response },
+      // });
     },
     *fetchCurrent(_, { call, put }) {
-      const response = yield call(queryCurrent);
-      yield put({
-        type: 'save',
-        payload: { currentUser: response },
-      });
+      // const response = yield call(queryCurrent);
+      // yield put({
+      //   type: 'save',
+      //   payload: { currentUser: response },
+      // });
     },
   },
 

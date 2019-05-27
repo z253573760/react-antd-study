@@ -8,78 +8,35 @@ export default [
     path: '/',
     component: '../layouts/BasicLayout',
     routes: [
-      { path: '/', redirect: '/goods/list/up' },
+      { path: '/', redirect: '/api/new' },
       {
-        path: '/order',
-        name: '订单管理',
+        path: '/api',
+        name: 'v16-新特性',
+        icon: 'smile',
+        component: './Api/index',
+      },
+      {
+        path: '/hooks',
+        name: 'Hooks-Demo',
         icon: 'smile',
         routes: [
           {
-            path: 'list/cook',
-            name: '点餐订单',
-            component: './Order/Cook/List',
-          },
-          {
-            path: 'list/subscribe',
-            name: '预约订单',
-            component: './Order/subscribe/List',
-          },
-          {
-            path: 'cook/detail',
-            component: './Order/Cook/Detail',
-          },
-          {
-            path: 'subscribe/detail',
-            component: './Order/Subscribe/Detail',
+            path: 'windows',
+            name: '监听页面大小',
+            icon: 'smile',
+            component: './Hooks/windows',
           },
         ],
       },
       {
-        path: '/goods',
-        name: '商品管理',
-        icon: 'smile',
+        path: '/UForm',
+        name: '表单-UForm',
+        icon: 'dashboard',
         routes: [
           {
-            path: 'list/check',
-            name: '待审核商品',
-            component: './Goods/List',
-            meta: {
-              types: 4,
-            },
-          },
-          {
-            path: 'list/wait',
-            name: '待上架商品',
-            component: './Goods/List',
-            meta: {
-              types: 2,
-            },
-          },
-          {
-            path: 'list/up',
-            name: '已上架商品',
-            component: './Goods/List',
-            meta: {
-              types: 1,
-            },
-          },
-          {
-            path: 'list/down',
-            name: '已下架商品',
-            component: './Goods/List',
-            meta: {
-              types: 3,
-            },
-          },
-          {
-            path: 'add',
-            name: '添加商品',
-            component: './Goods/Edit',
-          },
-          {
-            path: 'edit',
-            icon: 'smile',
-            component: './Goods/Edit',
+            path: 'dashboard',
+            name: '简单场景',
+            component: './UForm/index.js',
           },
         ],
       },
