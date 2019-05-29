@@ -61,4 +61,11 @@ export default {
   lessLoaderOptions: {
     javascriptEnabled: true,
   },
+  proxy: {
+    '/api': {
+      target: 'http://119.29.165.40:8010',
+      changeOrigin: true,
+      // pathRewrite: { '^/api': '' },
+    },
+  },
 };

@@ -42,7 +42,21 @@ const errorHandler = error => {
  */
 const request = extend({
   errorHandler, // 默认错误处理
-  credentials: 'include', // 默认请求是否带上cookie
+  credentials: 'include', // 默认请求是否带上cookie,
+  prefix: '/api',
 });
+
+request.interceptors.response.use(response => {
+  return response;
+});
+
+request.interceptors.request.use((url, options) => {
+  return { url, options };
+});
+// request.interceptors.response.use((response, options) => {
+//   response.headers.append('interceptors', 'yes yo');
+//   console.log('response', response);
+//   return response;
+// });
 
 export default request;

@@ -41,6 +41,11 @@ export default [
             name: 'useCallback-的使用',
             component: './Hooks/useCallback',
           },
+          {
+            path: 'useList',
+            name: '自己封装HOOKS轮子',
+            component: './Hooks/useList',
+          },
         ],
       },
       {
