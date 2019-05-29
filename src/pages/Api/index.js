@@ -5,6 +5,7 @@ import Hooks from './hooks';
 import Children from './children';
 import PureComponent from './PureComponent';
 import Memo from './memo';
+import Self from './self';
 import useDocumentTitle from '@/hooks/useDocumentTitle';
 const TabPane = Tabs.TabPane;
 
@@ -14,6 +15,7 @@ const list = [
   { name: 'children', component: <Children /> },
   { name: 'PureComponent', component: <PureComponent /> },
   { name: 'Memo', component: <Memo /> },
+  { name: '事件绑定-this', component: <Self /> },
 ];
 const useMode = defaultMode => {
   const [mode, setMode] = useState(defaultMode);

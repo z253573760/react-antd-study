@@ -28,7 +28,6 @@
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
     "dva": "^2.4.0",
-    "eslint-plugin-react-hooks": "^1.6.0",
     "lodash": "^4.17.10",
     "lodash-decorators": "^6.0.0",
     "memoize-one": "^4.0.0",
@@ -60,6 +59,7 @@
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-markdown": "^1.0.0-beta.6",
     "eslint-plugin-react": "^7.11.1",
+    "eslint-plugin-react-hooks": "^1.6.0",
     "husky": "^1.2.0",
     "lint-staged": "^8.1.0",
     "prettier": "1.15.2",
@@ -81,7 +81,5 @@
   "engines": {
     "node": ">=8.0.0"
   },
-  "husky": {
-
-  }
+  "husky": {}
 }

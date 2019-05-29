@@ -9,7 +9,6 @@ export default class extends React.Component {
   };
   componentDidMount() {
     const valueObj = this.state.valueObj;
-
     setInterval(() => {
       uid++;
       valueObj.bar.value = uid;

@@ -8,7 +8,7 @@ export default [
     path: '/',
     component: '../layouts/BasicLayout',
     routes: [
-      { path: '/', redirect: '/api/new' },
+      { path: '/', redirect: '/api' },
       {
         path: '/api',
         name: 'v16-新特性',
@@ -23,8 +23,23 @@ export default [
           {
             path: 'windows',
             name: '监听页面大小',
-            icon: 'smile',
+
             component: './Hooks/windows',
+          },
+          {
+            path: 'redux',
+            name: '模拟-redux',
+            component: './Hooks/useRedux',
+          },
+          {
+            path: 'useMemo',
+            name: 'useMemo-的使用',
+            component: './Hooks/useMemo',
+          },
+          {
+            path: 'useCallback',
+            name: 'useCallback-的使用',
+            component: './Hooks/useCallback',
           },
         ],
       },
