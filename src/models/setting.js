@@ -119,5 +119,19 @@ export default {
         ...payload,
       };
     },
+    save(state, action) {
+      return {
+        ...state,
+        ...action.payload,
+      };
+    },
+  },
+  effects: {
+    // *changeTheme({ payload }, { call, put }) {
+    //   yield put({
+    //     type: 'save',
+    //     payload: { navTheme: payload },
+    //   });
+    // },
   },
 };

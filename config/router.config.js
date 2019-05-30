@@ -8,9 +8,9 @@ export default [
     path: '/',
     component: '../layouts/BasicLayout',
     routes: [
-      { path: '/', redirect: '/api' },
+      { path: '/', redirect: '/new' },
       {
-        path: '/api',
+        path: '/new',
         name: 'v16-新特性',
         icon: 'smile',
         component: './Api/index',

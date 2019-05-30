@@ -24,12 +24,12 @@ const getIcon = icon => {
 };
 
 export default class BaseMenu extends PureComponent {
-
   /**
    * 获得菜单子节点
    * @memberof SiderMenu
    */
   getNavMenuItems = (menusData, parent) => {
+    console.log('menusData', menusData);
     if (!menusData) {
       return [];
     }
@@ -143,7 +143,6 @@ export default class BaseMenu extends PureComponent {
     const cls = classNames(className, {
       'top-nav-menu': mode === 'horizontal',
     });
-
     return (
       <Menu
         key="Menu"

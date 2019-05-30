@@ -16,7 +16,7 @@ import Footer from './Footer';
 import Header from './Header';
 import Context from './MenuContext';
 import SiderMenu from '@/components/SiderMenu';
-
+import SettingDrawer from '@/components/SettingDrawer';
 import styles from './BasicLayout.less';
 const { Content } = Layout;
 
@@ -113,12 +113,13 @@ class BasicLayout extends React.PureComponent {
     if (!currRouterData) {
       return 'Ant Design Pro';
     }
-    const pageName = formatMessage({
-      id: currRouterData.locale || currRouterData.name,
-      defaultMessage: currRouterData.name,
-    });
+    // 取消多语言配置
+    // const pageName = formatMessage({
+    //   id: currRouterData.locale || currRouterData.name,
+    //   defaultMessage: currRouterData.name,
+    // });
 
-    return `${pageName} - Ant Design Pro`;
+    return `${currRouterData.name} - Ant Design Pro`;
   };
 
   getLayoutStyle = () => {
@@ -151,6 +152,7 @@ class BasicLayout extends React.PureComponent {
       route: { routes },
       fixedHeader,
     } = this.props;
+    console.log(this.props);
 
     const isTop = PropsLayout === 'topmenu';
     const routerConfig = this.getRouterAuthority(pathname, routes);
@@ -173,6 +175,7 @@ class BasicLayout extends React.PureComponent {
             minHeight: '100vh',
           }}
         >
+          <SettingDrawer {...this.props} />
           <Header
             menuData={menuData}
             handleMenuCollapse={this.handleMenuCollapse}

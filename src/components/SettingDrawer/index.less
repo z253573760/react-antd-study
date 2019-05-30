@@ -1,0 +1,33 @@
+.warpper {
+  position: fixed;
+  top: 40%;
+  right: 0;
+  z-index: 99999;
+}
+.flex {
+  width: 100%;
+  display: flex;
+  > div {
+    margin-right: 25px;
+  }
+}
+.line {
+  margin: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  .label {
+    margin-right: 10px;
+  }
+}
+.tooltip-warpper {
+  cursor: pointer;
+  position: relative;
+  > div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 10;
+    color: red;
+    transform: translateX(-50%) translateY(-50%);
+  }
+}

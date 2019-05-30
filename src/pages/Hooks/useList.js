@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { Card, Button, Table, notification } from 'antd';
 import { getList } from '@/api/article';
 const defaultPageOpts = {
   status: undefined,
   current: 1,
   pageSize: 10,
-  sort: '-create_time',
+  sort: undefined,
 };
 
 const useList = (asyncApi, initPageOpts = defaultPageOpts) => {
@@ -43,9 +43,8 @@ const useList = (asyncApi, initPageOpts = defaultPageOpts) => {
   };
 };
 
-const getTableProps = ({ list, pageOpts, setPageOpts, count }) => ({
-  dataSource: list,
-  columns: [
+const useTableProps = ({ pageOpts, setPageOpts, count }) => {
+  const columns = useRef([
     {
       title: '标题',
       dataIndex: 'title',
@@ -55,6 +54,7 @@ const getTableProps = ({ list, pageOpts, setPageOpts, count }) => ({
       title: '状态',
       dataIndex: 'status',
       key: 'status',
+      sorter: true,
     },
     {
       title: '时间',
@@ -62,31 +62,46 @@ const getTableProps = ({ list, pageOpts, setPageOpts, count }) => ({
       key: 'create_time',
       sorter: true,
     },
-  ],
-  onChange: (pagination, filters, sorter) => {
-    if (!sorter.order) {
-      setPageOpts(defaultPageOpts);
-      return;
-    }
-    const { order, field } = sorter;
-    const sort = `${order === 'ascend' ? '' : '-'}${field}`;
-    setPageOpts({ ...pagination, sort });
-  },
-  pagination: {
+  ]);
+  // const opts = useMemo(
+  //   () => ({
+  //     pagination: {
+  //       ...pageOpts,
+  //       total: count,
+  //       showQuickJumper: true,
+  //       showSizeChanger: true,
+  //     },
+  //     onChange: (pagination, filters, sorter) => {
+  //       const sort = sorter.order
+  //         ? `${sorter.order === 'descend' ? '-' : ''}${sorter.columnKey}`
+  //         : undefined;
+  //       const pageOpts = { ...pagination, sort };
+  //       setPageOpts(pageOpts);
+  //     },
+  //   }),
+  //   [pageOpts, count]
+  // );
+  const pagination = useMemo(() => ({
     ...pageOpts,
     total: count,
-    onChange: (current, pageSize) => setPageOpts({ ...pageOpts, current, pageSize }),
-  },
-});
-
-export default () => {
-  const { list, count, loading, err, setPageOpts, pageOpts } = useList(getList);
+    showQuickJumper: true,
+    showSizeChanger: true,
+  }));
+  const onChange = useCallback((pagination, filters, sorter) => {
+    const sort = sorter.order
+      ? `${sorter.order === 'descend' ? '-' : ''}${sorter.columnKey}`
+      : undefined;
+    const pageOpts = { ...pagination, sort };
+    setPageOpts(pageOpts);
+  }, []);
+  return {
+    columns: columns.current,
+    pagination,
+    onChange,
+  };
+};
+const useRowSelection = cb => {
   const [checkList, setCheckList] = useState([]);
-  const tablePorps = useMemo(() => getTableProps({ list, pageOpts, setPageOpts, count }), [
-    pageOpts,
-    count,
-  ]);
-
   const rowSelection = useMemo(
     () => ({
       onChange: (_, selectedRows) => {
@@ -95,19 +110,28 @@ export default () => {
     }),
     []
   );
-
   const handlerClick = useCallback(
     () => {
-      notification.success({ message: checkList });
+      cb && cb(checkList);
     },
     [checkList]
   );
-
+  return {
+    handlerClick,
+    rowSelection,
+  };
+};
+export default () => {
+  const { list, count, loading, err, setPageOpts, pageOpts } = useList(getList);
+  const tablePorps = useTableProps({ pageOpts, setPageOpts, count });
+  const { rowSelection, handlerClick } = useRowSelection(list => {
+    notification.success({ message: list });
+  });
   return (
     <div style={{ padding: 20 }}>
       <Card>
         <Button onClick={handlerClick}>点击</Button>
-        <Table rowSelection={rowSelection} loading={loading} {...tablePorps} />
+        <Table dataSource={list} rowSelection={rowSelection} loading={loading} {...tablePorps} />
       </Card>
     </div>
   );

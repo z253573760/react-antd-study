@@ -12,7 +12,6 @@ function formatter(data, parentAuthority, parentName) {
       if (!item.name || !item.path) {
         return null;
       }
-
       let locale = 'menu';
       if (parentName) {
         locale = `${parentName}.${item.name}`;
@@ -22,7 +21,9 @@ function formatter(data, parentAuthority, parentName) {
 
       const result = {
         ...item,
-        name: formatMessage({ id: locale, defaultMessage: item.name }),
+        //   取消多语言配置
+        //   name: formatMessage({ id: locale, defaultMessage: item.name }),
+        name: item.name,
         locale,
         authority: item.authority || parentAuthority,
       };
