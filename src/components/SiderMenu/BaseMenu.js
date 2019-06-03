@@ -29,7 +29,6 @@ export default class BaseMenu extends PureComponent {
    * @memberof SiderMenu
    */
   getNavMenuItems = (menusData, parent) => {
-    console.log('menusData', menusData);
     if (!menusData) {
       return [];
     }
