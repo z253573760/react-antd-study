@@ -60,6 +60,12 @@ export default [
           },
         ],
       },
+      {
+        path: '/test',
+        name: '瞎写',
+        icon: 'dashboard',
+        component: './Test/index.js',
+      },
     ],
   },
 ];

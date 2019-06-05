@@ -152,7 +152,6 @@ class BasicLayout extends React.PureComponent {
       route: { routes },
       fixedHeader,
     } = this.props;
-    console.log(this.props);
 
     const isTop = PropsLayout === 'topmenu';
     const routerConfig = this.getRouterAuthority(pathname, routes);
@@ -192,6 +191,7 @@ class BasicLayout extends React.PureComponent {
         </Layout>
       </Layout>
     );
+
     return (
       <React.Fragment>
         <DocumentTitle title={this.getPageTitle(pathname, breadcrumbNameMap)}>

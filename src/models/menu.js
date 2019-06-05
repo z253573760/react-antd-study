@@ -23,7 +23,7 @@ function formatter(data, parentAuthority, parentName) {
         ...item,
         //   取消多语言配置
         //   name: formatMessage({ id: locale, defaultMessage: item.name }),
-        name: item.name,
+        //  name: item.name,
         locale,
         authority: item.authority || parentAuthority,
       };

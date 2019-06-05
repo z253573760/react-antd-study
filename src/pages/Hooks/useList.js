@@ -63,24 +63,6 @@ const useTableProps = ({ pageOpts, setPageOpts, count }) => {
       sorter: true,
     },
   ]);
-  // const opts = useMemo(
-  //   () => ({
-  //     pagination: {
-  //       ...pageOpts,
-  //       total: count,
-  //       showQuickJumper: true,
-  //       showSizeChanger: true,
-  //     },
-  //     onChange: (pagination, filters, sorter) => {
-  //       const sort = sorter.order
-  //         ? `${sorter.order === 'descend' ? '-' : ''}${sorter.columnKey}`
-  //         : undefined;
-  //       const pageOpts = { ...pagination, sort };
-  //       setPageOpts(pageOpts);
-  //     },
-  //   }),
-  //   [pageOpts, count]
-  // );
   const pagination = useMemo(() => ({
     ...pageOpts,
     total: count,

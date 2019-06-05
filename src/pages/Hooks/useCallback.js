@@ -4,15 +4,7 @@ import { Card, Button, notification } from 'antd';
 const a = 1;
 const b = 2;
 
-const test = {
-  name: 'jack',
-  getName: function() {
-    console.log(this);
-  },
-};
-const funcTest = test.getName;
-test.getName();
-funcTest();
+
 export default () => {
   const [value, setValue] = useState(0);
   const func = (str = '') => {

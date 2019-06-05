@@ -1,28 +1,25 @@
-import React, { useState } from 'react';
-// import { Drawer } from '@/components/SettingDrawer/node_modules/antd';
+import React, { memo, useState, useCallback } from 'react';
 import { Button, Switch, Drawer, Tooltip, Icon } from 'antd';
 import styles from './index.less';
 
-const BlockChecbox = ({ list, value, onChange }) => {
-  return (
-    <div className={styles.flex}>
-      {list.map(({ title, key, url }) => (
-        <Tooltip title={title} key={key}>
-          <div className={styles['tooltip-warpper']} onClick={() => onChange(key)}>
-            <img src={url} />
-            <div
-              style={{
-                display: value === key ? 'block' : 'none',
-              }}
-            >
-              <Icon type="check" />
-            </div>
+const BlockChecbox = memo(({ list, value, onChange }) => (
+  <div className={styles.flex}>
+    {list.map(({ title, key, url }) => (
+      <Tooltip title={title} key={key}>
+        <div className={styles['tooltip-warpper']} onClick={() => onChange(key)}>
+          <img src={url} />
+          <div
+            style={{
+              display: value === key ? 'block' : 'none',
+            }}
+          >
+            <Icon type="check" />
           </div>
-        </Tooltip>
-      ))}
-    </div>
-  );
-};
+        </div>
+      </Tooltip>
+    ))}
+  </div>
+));
 
 const themelist = [
   {
@@ -49,8 +46,8 @@ const layoutList = [
   },
 ];
 export default props => {
-  const [visible, setVisible] = useState(true);
-  const changeSetting = (key, value) => {
+  const [visible, setVisible] = useState(false);
+  const changeSetting = useCallback((key, value) => {
     const { setting, dispatch } = props;
     const nextState = { ...setting };
     nextState[key] = value;
@@ -63,7 +60,7 @@ export default props => {
       type: 'setting/changeSetting',
       payload: nextState,
     });
-  };
+  }, []);
   return (
     <div className={styles.warpper}>
       {!visible ? (
