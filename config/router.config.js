@@ -54,9 +54,14 @@ export default [
         icon: 'dashboard',
         routes: [
           {
-            path: 'dashboard',
+            path: 'simple',
             name: '简单场景',
-            component: './UForm/index.js',
+            component: './UForm/simple.js',
+          },
+          {
+            path: 'test',
+            name: '测试',
+            component: './UForm/test.js',
           },
         ],
       },

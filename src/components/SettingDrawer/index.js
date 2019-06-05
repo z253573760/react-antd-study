@@ -47,6 +47,7 @@ const layoutList = [
 ];
 export default props => {
   const [visible, setVisible] = useState(false);
+
   const changeSetting = useCallback((key, value) => {
     const { setting, dispatch } = props;
     const nextState = { ...setting };
