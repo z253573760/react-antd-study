@@ -46,6 +46,11 @@ export default [
             name: '自己封装HOOKS轮子',
             component: './Hooks/useList',
           },
+          {
+            path: 'tree',
+            name: '权限树单选',
+            component: './Hooks/tree',
+          },
         ],
       },
       {

@@ -63,10 +63,14 @@ export default {
   },
   proxy: {
     '/api': {
-      //   target: 'http://119.29.165.40:8010',
-      target: 'http://api.jiangniu.com/',
+      target: 'http://119.29.165.40:8010',
       changeOrigin: true,
-      pathRewrite: { '^/api': '' },
+      // pathRewrite: { '^/api': '' },
     },
+  },
+  treeShaking: true,
+  externals: {
+    react: 'window.React',
+    'react-dom': 'window.ReactDOM',
   },
 };

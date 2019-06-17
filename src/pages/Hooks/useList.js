@@ -22,12 +22,15 @@ const useList = (asyncApi, initPageOpts = defaultPageOpts) => {
           const {
             data: { rows, count },
           } = await asyncApi(pageOpts);
+          console.log(rows);
           setList(rows);
           setCount(count);
         } catch (err) {
+          console.log(err);
           setErr(true);
         } finally {
           setLoading(false);
+          console.log('end');
         }
       })();
     },
@@ -98,22 +101,38 @@ const useRowSelection = cb => {
     },
     [checkList]
   );
+  const onChange = useCallback(selectedRowKeys => {
+    console.log('selectedRowKeys', selectedRowKeys);
+    setCheckList(selectedRowKeys);
+  }, []);
   return {
+    selectedRowKeys: checkList,
     handlerClick,
-    rowSelection,
+    onChange,
+    // rowSelection,
   };
 };
+
 export default () => {
   const { list, count, loading, err, setPageOpts, pageOpts } = useList(getList);
   const tablePorps = useTableProps({ pageOpts, setPageOpts, count });
-  const { rowSelection, handlerClick } = useRowSelection(list => {
+  const rowSelection = useRowSelection(list => {
     notification.success({ message: list });
   });
+
   return (
     <div style={{ padding: 20 }}>
       <Card>
-        <Button onClick={handlerClick}>点击</Button>
-        <Table dataSource={list} rowSelection={rowSelection} loading={loading} {...tablePorps} />
+        <Button disabled={!rowSelection.selectedRowKeys.length} onClick={rowSelection.handlerClick}>
+          点击
+        </Button>
+        <Table
+          rowKey={({ id }) => id}
+          dataSource={list}
+          rowSelection={rowSelection}
+          loading={loading}
+          {...tablePorps}
+        />
       </Card>
     </div>
   );

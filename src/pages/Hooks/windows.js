@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-
 import { Card } from 'antd';
-function getSize() {
+
+const getSize = () => {
   return {
     innerHeight: window.innerHeight,
     innerWidth: window.innerWidth,
     outerHeight: window.outerHeight,
     outerWidth: window.outerWidth,
   };
-}
+};
 
 function useWindowSize() {
   let [windowSize, setWindowSize] = useState(getSize());
@@ -26,6 +26,10 @@ function useWindowSize() {
 
   return windowSize;
 }
+// const obj = {};
+// obj.list = [1, 2, 3];
+// obj.list.forEach(item => (item = item + 1));
+// console.log(null);
 export default () => {
   const windowSize = useWindowSize();
   return (

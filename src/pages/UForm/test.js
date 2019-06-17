@@ -21,8 +21,12 @@ const Address = () => {
   const [provinces, setProvinces] = useState([]);
   useEffect(() => {
     (async () => {
-      const { datas } = await getList('');
-      setProvinces(datas.map(_ => ({ ..._, value: _.id, label: _.name })));
+      try {
+        const { datas } = await getList('');
+        setProvinces(datas.map(_ => ({ ..._, value: _.id, label: _.name })));
+      } catch (err) {
+        console.log(err);
+      }
     })();
   }, []);
 
