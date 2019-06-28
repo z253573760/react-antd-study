@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'dva';
 import { Card, Tabs } from 'antd';
 import AddRole from './AddRole';
 const TabPane = Tabs.TabPane;
@@ -42,43 +43,63 @@ const CurryFunc = () => {
   console.log(curryAdd(1)(2)(3));
   return <Card>{}</Card>;
 };
-const InstanceOfFunc = () => {
-  const list = [
-    '新宿区     豊岛区     台东区     港区     渋谷区     板桥区     江东区     中央区     文京区     世田谷区     练马区     品川区     杉并区     大田区     墨田区     北区     中野区     ',
-  ];
+const Extends = () => {
+  function Person(name, age) {
+    this.name = name;
+    this.age = age;
+    this.sing = function() {
+      console.log(`${this.name}- sing `);
+    };
+  }
+  Person.prototype.run = function() {
+    console.log(`${this.name}- run `);
+  };
 
-  const arr = list[0].split('区').map(_ => `${_.trim()}区`);
-  console.log(arr);
+  function Man(name, age) {
+    Person.call(this, name, age);
+  }
+
+  Man.prototype = Object.create(Person.prototype);
+  Man.prototype.constructor = Man;
+
+  const xiaoming = new Man('小明', 18);
+  xiaoming.run();
+  xiaoming.sing();
+  console.log(Person.prototype);
+  const list = [1, 2, 3];
+  list[10] = 10;
+  console.log(list);
+  for (const item of list) {
+    console.log(item);
+  }
+  const arr = list.filter(_ => _ === undefined);
+  console.log('arr', arr);
   return <Card>{'str'}</Card>;
 };
-// class Child extends React.Component {
-//   render() {
-//     console.log('render');
-//     return <div>{this.props.value}</div>;
-//   }
-// }
-const Child = props => {
-  console.log('render');
-  return <div>{props.value}</div>;
-};
-class Foo extends React.Component {
-  state = {
-    a: 1,
+
+const Created = () => {
+  const person = {
+    isHuman: false,
+    printIntroduction: function() {
+      console.log(`My name is ${this.name}. Am I human? ${this.isHuman}`);
+    },
   };
-  render() {
-    return (
-      <>
-        <div onClick={() => this.setState({ a: 3 })}>btn</div> <Child value={this.state.a} />
-      </>
-    );
-  }
-}
+  const me = {};
+  console.log(me);
+  return <>Object.created</>;
+};
 const list = [
-  { name: 'InstanceOf', component: <AddRole /> },
+  { name: 'Object.created', component: <Created /> },
+  { name: '继承', component: <Extends /> },
   { name: '柯里化函数', component: <CurryFunc /> },
   { name: '惰性函数', component: <LazyFunc /> },
 ];
-export default () => {
+const App = props => {
+  console.log('props', props);
+  const result = props.dispatch({ type: 'user/test' });
+  result.then(res => {
+    console.log('res', res);
+  });
   return (
     <Card>
       <Tabs tabPosition="top" style={{ height: 620 }}>
@@ -91,3 +112,8 @@ export default () => {
     </Card>
   );
 };
+
+export default connect(state => {
+  console.log('state', state);
+  return {};
+})(App);

@@ -68,6 +68,11 @@ export default [
             name: '测试',
             component: './UForm/test.js',
           },
+          {
+            path: 'dispatch',
+            name: 'dispatch',
+            component: './UForm/dispatch.js',
+          },
         ],
       },
       {

@@ -133,5 +133,8 @@ export default {
     //     payload: { navTheme: payload },
     //   });
     // },
+    *test() {
+      console.log('setting test');
+    },
   },
 };
